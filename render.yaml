@@ -1,0 +1,34 @@
+# Render blueprint for the BACKEND (API). The frontend is deployed separately (e.g. Vercel).
+# The database is Aiven MySQL (set the MYSQL_* values in the Render dashboard).
+services:
+  - type: web
+    name: bangbang-sgms-api
+    rootDir: backend
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: MYSQL_SSL
+        value: "true"
+      - key: MYSQL_HOST
+        sync: false
+      - key: MYSQL_PORT
+        sync: false
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: MYSQL_DATABASE
+        sync: false
+      - key: MYSQL_SSL_CA
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
